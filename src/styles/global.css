@@ -1,151 +1,137 @@
 @import 'tailwindcss';
 
 @theme {
-  /* Dark luxury palette — near-black navy, silver/platinum, crisp white */
-  --color-ink: #05070d;
-  --color-navy: #0a0e1a;
-  --color-navy-2: #0f1525;
-  --color-navy-3: #161e33;
-  --color-silver: #c9cfdb;
-  --color-platinum: #98a1b3;
-  --color-pearl: #f5f6f9;
+  --color-forest: #2d4a3e;
+  --color-sage: #7a9e8e;
+  --color-ivory: #f5f0e8;
+  --color-cream: #ede8dc;
+  --color-gold: #c9a96e;
+  --color-charcoal: #2a2a2a;
 
-  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
-  --font-body: 'Outfit', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+}
+
+:root {
+  --forest: #2d4a3e;
+  --sage: #7a9e8e;
+  --ivory: #f5f0e8;
+  --cream: #ede8dc;
+  --gold: #c9a96e;
+  --charcoal: #2a2a2a;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
 }
 
 body {
+  font-family: var(--font-body);
+  background-color: var(--ivory);
+  color: var(--charcoal);
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
 }
 
-::selection {
-  background: var(--color-silver);
-  color: var(--color-ink);
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  font-weight: 300;
 }
 
-/* ---- Animation initial states (revealed by GSAP in main.ts) ---- */
-.hero-word,
-.fade-up,
+/* Hero headline words start hidden; GSAP staggers them in on load */
+.hero-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(2rem);
+}
+
+/* Elements revealed by ScrollTrigger */
+.fade-up {
+  opacity: 0;
+  transform: translateY(2.5rem);
+}
+
 .stagger-cards > * {
   opacity: 0;
-  transform: translateY(28px);
+  transform: translateY(2.5rem);
 }
 
-.hero-fade {
-  opacity: 0;
-}
-
-/* Reduced motion / no-JS fallback: reveal everything */
-.no-motion .hero-word,
-.no-motion .fade-up,
-.no-motion .stagger-cards > *,
-.no-motion .hero-fade {
-  opacity: 1 !important;
-  transform: none !important;
-}
-
-/* ---- Signature element: concentric silver rings ---- */
-.rings-slow {
-  transform-origin: 50% 50%;
-  animation: rings-rotate 90s linear infinite;
-}
-.rings-slower {
-  transform-origin: 50% 50%;
-  animation: rings-rotate 150s linear infinite reverse;
-}
-@keyframes rings-rotate {
-  to {
-    transform: rotate(360deg);
-  }
-}
+/* If JS fails or user prefers reduced motion, keep everything visible */
 @media (prefers-reduced-motion: reduce) {
-  .rings-slow,
-  .rings-slower {
-    animation: none;
+  .hero-word,
+  .fade-up,
+  .stagger-cards > * {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 
-/* ---- Nav scrolled state ---- */
+/* Fixed nav: transparent over the hero, ivory once scrolled */
 #site-nav {
   transition:
-    background-color 0.45s ease,
-    border-color 0.45s ease;
-  border-bottom: 1px solid transparent;
+    background-color 0.4s ease,
+    box-shadow 0.4s ease,
+    color 0.4s ease;
 }
+
 #site-nav.scrolled {
-  background-color: rgb(5 7 13 / 0.88);
-  backdrop-filter: blur(14px);
-  border-bottom-color: rgb(201 207 219 / 0.12);
+  background-color: var(--ivory);
+  box-shadow: 0 1px 24px rgb(42 42 42 / 0.08);
 }
 
-/* ---- Hairline rules ---- */
-.hairline {
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    rgb(201 207 219 / 0.35),
-    transparent
-  );
+/* While the mobile overlay is open the nav sits on forest, so stay ivory. */
+#site-nav.menu-open {
+  color: var(--ivory) !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
 }
 
-/* ---- Link underline sweep ---- */
-.link-sweep {
+#site-nav .nav-link {
   position: relative;
 }
-.link-sweep::after {
+
+#site-nav .nav-link::after {
   content: '';
   position: absolute;
   left: 0;
   bottom: -4px;
   width: 100%;
   height: 1px;
-  background: currentColor;
+  background-color: var(--gold);
   transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.link-sweep:hover::after,
-.link-sweep[aria-current='page']::after {
-  transform: scaleX(1);
   transform-origin: left;
+  transition: transform 0.3s ease;
 }
 
-/* ---- FAQ accordion ---- */
-.faq-answer {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+#site-nav .nav-link:hover::after {
+  transform: scaleX(1);
 }
-.faq-answer > div {
-  overflow: hidden;
+
+/* Services accordion */
+details.service-item summary {
+  list-style: none;
+  cursor: pointer;
 }
-.faq-item.open .faq-answer {
-  grid-template-rows: 1fr;
+
+details.service-item summary::-webkit-details-marker {
+  display: none;
 }
-.faq-item .faq-icon {
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+
+details.service-item summary .accordion-icon {
+  transition: transform 0.3s ease;
 }
-.faq-item.open .faq-icon {
+
+details.service-item[open] summary .accordion-icon {
   transform: rotate(45deg);
-}
-
-/* ---- Mobile menu overlay ---- */
-#mobile-menu {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease;
-}
-#mobile-menu.open {
-  opacity: 1;
-  pointer-events: auto;
-}
-body.menu-locked {
-  overflow: hidden;
-}
-
-/* ---- Image treatment ---- */
-.img-luxe {
-  filter: saturate(0.82) contrast(1.04);
 }

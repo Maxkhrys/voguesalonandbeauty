@@ -1,5 +1,5 @@
 ---
-import Rings from './Rings.astro';
+import Fern from './Fern.astro';
 
 interface Props {
   eyebrow: string;
@@ -9,19 +9,13 @@ interface Props {
 const { eyebrow, title, intro } = Astro.props;
 ---
 
-<section class="relative overflow-hidden pt-44 pb-20 lg:pt-56 lg:pb-28">
-  <Rings class="absolute top-[-260px] right-[-220px] h-[620px] w-[620px] opacity-70" />
-  <div class="relative mx-auto max-w-7xl px-6 lg:px-10">
-    <p class="fade-up text-[0.72rem] tracking-[0.32em] text-platinum uppercase">{eyebrow}</p>
-    <h1 class="fade-up font-display mt-5 max-w-3xl text-5xl font-light tracking-tight text-pearl lg:text-7xl">
-      {title}
-    </h1>
-    {
-      intro && (
-        <p class="fade-up mt-7 max-w-xl text-base leading-relaxed font-light text-silver/90 lg:text-lg">
-          {intro}
-        </p>
-      )
-    }
+<section class="relative overflow-hidden bg-forest pb-20 pt-36 text-ivory">
+  <Fern
+    class="botanical-sway pointer-events-none absolute -right-10 -top-12 h-80 w-auto text-sage opacity-15"
+  />
+  <div class="relative mx-auto max-w-6xl px-6">
+    <p class="text-sm uppercase tracking-[0.35em] text-gold">{eyebrow}</p>
+    <h1 class="mt-4 font-heading text-5xl font-light sm:text-6xl">{title}</h1>
+    {intro && <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ivory/80">{intro}</p>}
   </div>
 </section>

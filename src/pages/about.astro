@@ -1,89 +1,114 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PageHeader from '../components/PageHeader.astro';
-import Rings from '../components/Rings.astro';
-
-const BOOKING_URL = 'https://salon67wicklow.book.app';
+import Divider from '../components/Divider.astro';
 
 const values = [
   {
-    title: 'Personal attention',
-    copy: 'As a small business, we pride ourselves on personal attention and dedication to every detail.',
+    title: 'Craft',
+    description:
+      'Our stylists and therapists train continuously, so the techniques on our menu — from balayage to HD brows — are always current and always done properly.',
   },
   {
-    title: 'Quality & integrity',
-    copy: 'Our approach is rooted in quality and integrity — in our products, our craft and our advice.',
+    title: 'Care',
+    description:
+      'No conveyor belt here. Every appointment starts with a real consultation and ends when you are genuinely happy with the mirror.',
   },
   {
-    title: 'Confidence, always',
-    copy: 'We ensure every client leaves feeling confident and beautiful — that is the whole point.',
+    title: 'Community',
+    description:
+      'We are a Main Street salon through and through — first jobs, big birthdays, wedding mornings. Wicklow Town walks through our door every day.',
   },
+];
+
+const team = [
+  { initials: 'VS', name: 'Senior Stylist', role: 'Hair — colour & cutting' },
+  { initials: 'BT', name: 'Beauty Therapist', role: 'Skin, brows & lashes' },
+  { initials: 'NT', name: 'Nail Technician', role: 'Manicure, pedicure & shellac' },
+  { initials: 'MT', name: 'Massage Therapist', role: 'Relaxation & deep tissue' },
 ];
 ---
 
-<Layout
-  title="About — Salon 67"
-  description="Salon 67 is Wicklow's premier destination for top-quality hair extension services. A small business built on passion, quality and integrity."
->
+<Layout title="About Us — Vogue Image Design, Wicklow Town">
   <PageHeader
-    eyebrow="About"
-    title="A simple idea, fuelled by a deep passion"
+    eyebrow="About us"
+    title="A Main Street salon with a big heart"
+    intro="Vogue Image Design has been part of Wicklow Town life for years — a place where good hair, great chats and a proper cup of tea come as standard."
   />
 
-  <section class="pb-24 lg:pb-32">
-    <div class="mx-auto max-w-7xl px-6 lg:px-10">
-      <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
-        <div class="fade-up relative">
-          <div class="overflow-hidden border border-silver/10">
-            <img
-              src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1400&q=80"
-              alt="Elegant salon interior"
-              loading="lazy"
-              class="img-luxe parallax-img aspect-[4/5] w-full object-cover"
-            />
-          </div>
-          <Rings class="absolute right-[-90px] bottom-[-90px] hidden h-72 w-72 lg:block" />
-        </div>
-
-        <div class="fade-up">
-          <p class="font-display text-2xl leading-relaxed font-light text-pearl lg:text-3xl">
-            It all began with a simple idea fuelled by a deep passion.
+  <section class="bg-ivory py-20">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="fade-up mx-auto max-w-3xl text-center">
+        <h2 class="font-heading text-4xl font-light text-forest">Our story</h2>
+        <Divider class="mt-8 text-sage" />
+        <div class="mt-10 space-y-6 text-left leading-relaxed text-charcoal/80">
+          <p>
+            Tucked into the Up Mall on Main Street, Vogue Image Design started with a simple
+            idea: one salon where you could get your hair, beauty and a bit of headspace all
+            under the same roof. No travelling between appointments, no being rushed out the
+            door — just skilled hands and time taken.
           </p>
-          <p class="mt-7 text-base leading-relaxed font-light text-platinum">
-            As a small business, we pride ourselves on personal attention and dedication to every
-            detail. Our approach is rooted in quality and integrity.
+          <p>
+            Today the salon is busier than ever, but the feel hasn't changed. We're open seven
+            days a week because life doesn't keep office hours, and we always hold space for
+            walk-ins because sometimes you just need a blow dry <em>today</em>.
           </p>
-          <p class="mt-5 text-base leading-relaxed font-light text-platinum">
-            Salon 67 is Wicklow's premier destination for top-quality hair extension services and
-            outstanding tattoos. With a team of experienced professionals and a commitment to
-            customer satisfaction, we ensure every client leaves feeling confident and beautiful.
+          <p>
+            Whether it's a six-monthly restyle, shellac before your holidays or a quiet hour on
+            the massage table, you'll leave feeling more like yourself. That's the whole point.
           </p>
-          <a
-            href={BOOKING_URL}
-            target="_blank"
-            rel="noopener"
-            class="bg-silver text-ink mt-10 inline-block px-10 py-4 text-[0.78rem] tracking-[0.28em] uppercase transition-all duration-300 hover:bg-pearl"
-          >
-            Book a visit
-          </a>
         </div>
       </div>
-    </div>
-  </section>
 
-  <section class="bg-ink border-t border-silver/10 py-24 lg:py-32">
-    <div class="mx-auto max-w-7xl px-6 lg:px-10">
-      <div class="stagger-cards grid gap-12 md:grid-cols-3">
+      <div class="stagger-cards mt-20 grid gap-8 md:grid-cols-3">
         {
-          values.map((v, i) => (
-            <div class="border-t border-silver/20 pt-8">
-              <p class="font-display text-5xl font-light text-silver/25">0{i + 1}</p>
-              <h2 class="font-display mt-4 text-2xl font-light text-pearl">{v.title}</h2>
-              <p class="mt-4 text-sm leading-relaxed font-light text-platinum">{v.copy}</p>
+          values.map((value) => (
+            <div class="border border-cream bg-white p-10 text-center">
+              <h3 class="font-heading text-3xl font-light text-forest">{value.title}</h3>
+              <span class="mx-auto mt-4 block h-px w-10 bg-gold" />
+              <p class="mt-5 text-sm leading-relaxed text-charcoal/75">{value.description}</p>
             </div>
           ))
         }
       </div>
+    </div>
+  </section>
+
+  <section class="fade-up">
+    <img
+      src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=1800&q=80"
+      alt="Inside the salon — styling chairs and mirrors"
+      class="h-[26rem] w-full object-cover sm:h-[32rem]"
+      loading="lazy"
+    />
+  </section>
+
+  <section class="bg-cream py-20">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="fade-up text-center">
+        <p class="text-sm uppercase tracking-[0.35em] text-sage">The team</p>
+        <h2 class="mt-4 font-heading text-4xl font-light text-forest">
+          The people behind the chairs
+        </h2>
+      </div>
+
+      <div class="stagger-cards mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          team.map((member) => (
+            <div class="bg-white p-8 text-center">
+              <div class="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-forest">
+                <span class="font-heading text-3xl font-light text-gold">{member.initials}</span>
+              </div>
+              <h3 class="mt-6 font-heading text-2xl font-light text-forest">{member.name}</h3>
+              <p class="mt-2 text-sm text-charcoal/65">{member.role}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <p class="fade-up mt-12 text-center text-sm text-charcoal/60">
+        Team photos coming soon — pop in and say hello in the meantime.
+      </p>
     </div>
   </section>
 </Layout>

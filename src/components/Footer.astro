@@ -1,106 +1,74 @@
 ---
-const BOOKING_URL = 'https://salon67wicklow.book.app';
-const LOGO_URL =
-  'https://primary.jwwb.nl/public/n/b/v/temp-ntlbgehuitxuupijjhfo/img-20250130-wa0001-high-opm17x.jpg';
+import Divider from './Divider.astro';
 
-const links = [
-  { href: '/', label: 'Home' },
-  { href: '/services', label: 'Services' },
-  { href: '/shop', label: 'Shop' },
-  { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' },
-];
-
-const socials = [
-  { href: 'https://facebook.com/share/1FgRcJDdt4', label: 'Facebook' },
-  { href: 'https://instagram.com/salon67wicklow', label: 'Instagram' },
-  { href: 'https://tiktok.com/@salon67wicklow', label: 'TikTok' },
-];
+const year = new Date().getFullYear();
 ---
 
-<footer class="bg-ink border-t border-silver/10">
-  <div class="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
-    <div class="grid gap-12 md:grid-cols-3">
+<footer class="bg-forest text-ivory">
+  <div class="mx-auto max-w-6xl px-6 py-16">
+    <div class="grid gap-12 md:grid-cols-4">
       <div>
-        <a href="/" class="inline-flex items-center gap-3">
-          <img
-            src={LOGO_URL}
-            alt="Salon 67 logo"
-            width="56"
-            height="56"
-            loading="lazy"
-            class="h-14 w-14 rounded-full object-cover ring-1 ring-silver/25"
-          />
-          <span class="font-display text-xl tracking-[0.18em] text-pearl">SALON 67</span>
+        <a href="/" class="flex flex-col" aria-label="Vogue Image Design — home">
+          <span class="font-heading text-3xl font-light tracking-[0.25em]">VOGUE</span>
+          <span class="mt-1 text-xs uppercase tracking-[0.3em] text-sage">Image Design</span>
         </a>
-        <p class="mt-5 max-w-xs text-sm leading-relaxed font-light text-platinum">
-          Specialists in blonde colouring &amp; hair extensions — Wicklow Town.
+        <p class="mt-5 max-w-xs text-sm leading-relaxed text-ivory/70">
+          Hair &amp; beauty salon in the heart of Wicklow Town. Open seven days a week —
+          walk-ins always welcome.
         </p>
-        <a
-          href={BOOKING_URL}
-          target="_blank"
-          rel="noopener"
-          class="mt-6 inline-block border border-silver/40 px-7 py-3 text-[0.72rem] tracking-[0.28em] text-pearl uppercase transition-all duration-300 hover:bg-silver hover:text-ink"
-        >
-          Book now
-        </a>
       </div>
 
       <div>
-        <h3 class="text-[0.72rem] tracking-[0.32em] text-silver uppercase">Quick links</h3>
-        <ul class="mt-5 space-y-3">
-          {
-            links.map((link) => (
-              <li>
-                <a
-                  href={link.href}
-                  class="text-sm font-light text-platinum transition-colors hover:text-pearl"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))
-          }
+        <h3 class="text-sm uppercase tracking-[0.25em] text-gold">Quick links</h3>
+        <ul class="mt-5 space-y-3 text-sm">
+          <li><a href="/services" class="transition-colors hover:text-gold">Services</a></li>
+          <li><a href="/booking" class="transition-colors hover:text-gold">Book an appointment</a></li>
+          <li><a href="/about" class="transition-colors hover:text-gold">About us</a></li>
+          <li><a href="/contact" class="transition-colors hover:text-gold">Contact</a></li>
+          <li>
+            <a
+              href="https://facebook.com/VogueHairAndBeautySalonWicklowTown"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="transition-colors hover:text-gold"
+            >
+              Facebook
+            </a>
+          </li>
         </ul>
       </div>
 
       <div>
-        <h3 class="text-[0.72rem] tracking-[0.32em] text-silver uppercase">Visit us</h3>
-        <address class="mt-5 text-sm leading-relaxed font-light text-platinum not-italic">
-          Salon 67<br />
-          Wicklow Town<br />
-          A67 HD96
+        <h3 class="text-sm uppercase tracking-[0.25em] text-gold">Opening hours</h3>
+        <ul class="mt-5 space-y-3 text-sm text-ivory/85">
+          <li class="flex justify-between gap-6">
+            <span>Monday – Sunday</span>
+            <span>9:30am – 6:00pm</span>
+          </li>
+          <li class="text-ivory/60">Open 7 days a week</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-sm uppercase tracking-[0.25em] text-gold">Find us</h3>
+        <address class="mt-5 space-y-3 text-sm not-italic text-ivory/85">
+          <p>
+            Shop A, No. 20 Up Mall,<br />
+            Main St, Wicklow Town,<br />
+            Co. Wicklow
+          </p>
+          <p>
+            <a href="tel:+35340432790" class="transition-colors hover:text-gold">0404 32 790</a>
+          </p>
         </address>
-        <p class="mt-4">
-          <a
-            href="tel:040466045"
-            class="text-sm font-light text-platinum transition-colors hover:text-pearl"
-          >
-            0404 66 045
-          </a>
-        </p>
-        <ul class="mt-6 flex gap-6">
-          {
-            socials.map((s) => (
-              <li>
-                <a
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener"
-                  class="link-sweep text-[0.72rem] tracking-[0.22em] text-platinum uppercase transition-colors hover:text-pearl"
-                >
-                  {s.label}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
       </div>
     </div>
 
-    <div class="hairline mt-14"></div>
-    <p class="mt-8 text-center text-xs font-light tracking-[0.22em] text-platinum/70">
-      © 2026 Salon 67
-    </p>
+    <Divider class="mt-14 text-sage" />
+
+    <div class="mt-8 flex flex-col items-center justify-between gap-3 text-xs text-ivory/50 sm:flex-row">
+      <p>&copy; {year} Vogue Image Design. All rights reserved.</p>
+      <p>Site by Max</p>
+    </div>
   </div>
 </footer>

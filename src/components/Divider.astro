@@ -1,0 +1,19 @@
+---
+// Botanical section divider: a small leaf sprig between two hairlines.
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+<div class={`flex items-center justify-center gap-5 ${className}`} aria-hidden="true">
+  <span class="h-px w-16 bg-current opacity-40 sm:w-24"></span>
+  <svg viewBox="0 0 80 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="h-6 w-14 shrink-0">
+    <path d="M40 28 C39 18 39 10 40 3" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"></path>
+    <path d="M39 22 C30 21 23 16 21 8 C30 10 37 15 39 22 Z"></path>
+    <path d="M41 22 C50 21 57 16 59 8 C50 10 43 15 41 22 Z"></path>
+    <path d="M39 12 C33 11 28 8 27 3 C33 4 38 8 39 12 Z"></path>
+    <path d="M41 12 C47 11 52 8 53 3 C47 4 42 8 41 12 Z"></path>
+  </svg>
+  <span class="h-px w-16 bg-current opacity-40 sm:w-24"></span>
+</div>

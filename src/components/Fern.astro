@@ -1,0 +1,35 @@
+---
+// Inline fern sprig used as hero watermark and decorative accents.
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+<svg
+  class={className}
+  viewBox="0 0 200 400"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+>
+  <g fill="currentColor">
+    <path d="M100 395 C96 300 104 170 100 18" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round"></path>
+    <!-- left leaflets, largest at the base tapering to the tip -->
+    <path d="M99 350 C64 344 36 322 26 288 C62 296 90 320 99 350 Z"></path>
+    <path d="M99 295 C66 289 40 268 31 236 C65 244 91 267 99 295 Z"></path>
+    <path d="M99 240 C69 234 45 215 37 186 C68 193 92 214 99 240 Z"></path>
+    <path d="M99 185 C72 180 51 163 44 138 C71 144 92 162 99 185 Z"></path>
+    <path d="M99 132 C76 128 58 113 52 92 C75 97 93 112 99 132 Z"></path>
+    <path d="M99 84 C81 81 67 70 62 53 C80 57 94 69 99 84 Z"></path>
+    <!-- right leaflets -->
+    <path d="M101 350 C136 344 164 322 174 288 C138 296 110 320 101 350 Z"></path>
+    <path d="M101 295 C134 289 160 268 169 236 C135 244 109 267 101 295 Z"></path>
+    <path d="M101 240 C131 234 155 215 163 186 C132 193 108 214 101 240 Z"></path>
+    <path d="M101 185 C128 180 149 163 156 138 C129 144 108 162 101 185 Z"></path>
+    <path d="M101 132 C124 128 142 113 148 92 C125 97 107 112 101 132 Z"></path>
+    <path d="M101 84 C119 81 133 70 138 53 C120 57 106 69 101 84 Z"></path>
+    <!-- tip leaf -->
+    <path d="M100 46 C93 35 92 24 100 12 C108 24 107 35 100 46 Z"></path>
+  </g>
+</svg>

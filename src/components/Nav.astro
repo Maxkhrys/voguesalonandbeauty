@@ -1,98 +1,104 @@
 ---
-const BOOKING_URL = 'https://salon67wicklow.book.app';
-const LOGO_URL =
-  'https://primary.jwwb.nl/public/n/b/v/temp-ntlbgehuitxuupijjhfo/img-20250130-wa0001-high-opm17x.jpg';
-
 const links = [
   { href: '/', label: 'Home' },
   { href: '/services', label: 'Services' },
-  { href: '/shop', label: 'Shop' },
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
 ];
-
-const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const { pathname } = Astro.url;
 ---
 
-<header id="site-nav" class="fixed inset-x-0 top-0 z-50">
-  <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
-    <a href="/" class="flex items-center gap-3" aria-label="Salon 67 — home">
-      <img
-        src={LOGO_URL}
-        alt="Salon 67 logo"
-        width="48"
-        height="48"
-        class="h-12 w-12 rounded-full object-cover ring-1 ring-silver/30"
-      />
-      <span class="font-display text-lg tracking-[0.18em] text-pearl">SALON 67</span>
+<header
+  id="site-nav"
+  class="fixed inset-x-0 top-0 z-50 text-ivory [&.scrolled]:text-charcoal"
+>
+  <nav class="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
+    <a href="/" class="flex items-baseline gap-2" aria-label="Vogue Image Design — home">
+      <span class="font-heading text-3xl font-light tracking-[0.25em]">VOGUE</span>
+      <span class="text-xs uppercase tracking-[0.3em] opacity-80">Image Design</span>
     </a>
 
-    <ul class="hidden items-center gap-9 lg:flex">
+    <div class="hidden items-center gap-8 md:flex">
       {
         links.map((link) => (
-          <li>
-            <a
-              href={link.href}
-              aria-current={path === link.href ? 'page' : undefined}
-              class="link-sweep text-[0.8rem] font-light tracking-[0.22em] text-silver uppercase transition-colors hover:text-pearl"
-            >
-              {link.label}
-            </a>
-          </li>
+          <a
+            href={link.href}
+            class:list={[
+              'nav-link text-sm uppercase tracking-[0.2em]',
+              pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href))
+                ? 'text-gold'
+                : '',
+            ]}
+          >
+            {link.label}
+          </a>
         ))
       }
-    </ul>
-
-    <div class="flex items-center gap-4">
       <a
-        href={BOOKING_URL}
-        target="_blank"
-        rel="noopener"
-        class="hidden border border-silver/50 px-6 py-2.5 text-[0.75rem] tracking-[0.28em] text-pearl uppercase transition-all duration-300 hover:border-silver hover:bg-silver hover:text-ink sm:inline-block"
+        href="/booking"
+        class="bg-gold px-5 py-2.5 text-sm uppercase tracking-[0.2em] text-charcoal transition-colors hover:bg-sage hover:text-ivory"
       >
         Book now
       </a>
-      <button
-        id="menu-toggle"
-        type="button"
-        aria-label="Open menu"
-        aria-expanded="false"
-        aria-controls="mobile-menu"
-        class="relative z-50 flex h-11 w-11 flex-col items-center justify-center gap-1.5 lg:hidden"
-      >
-        <span class="block h-px w-6 bg-pearl"></span>
-        <span class="block h-px w-6 bg-pearl"></span>
-        <span class="block h-px w-6 bg-pearl"></span>
-      </button>
     </div>
+
+    <button
+      id="nav-toggle"
+      type="button"
+      class="flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="nav-overlay"
+    >
+      <span class="block h-px w-7 bg-current transition-transform"></span>
+      <span class="block h-px w-7 bg-current transition-opacity"></span>
+      <span class="block h-px w-7 bg-current transition-transform"></span>
+    </button>
   </nav>
 </header>
 
-<!-- Fullscreen dark overlay menu (mobile) -->
+<!-- Fullscreen mobile menu -->
 <div
-  id="mobile-menu"
-  class="fixed inset-0 z-40 flex flex-col items-center justify-center gap-2 bg-ink/97 backdrop-blur-xl lg:hidden"
+  id="nav-overlay"
+  class="invisible fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 bg-forest opacity-0 transition-all duration-300 md:hidden"
 >
   {
-    links.map((link, i) => (
+    [...links, { href: '/booking', label: 'Book now' }].map((link) => (
       <a
         href={link.href}
-        class="font-display py-3 text-3xl font-light tracking-wide text-pearl transition-colors hover:text-silver"
-        style={`transition-delay: ${i * 40}ms`}
+        class:list={[
+          'font-heading text-4xl font-light',
+          link.href === '/booking' ? 'text-gold' : 'text-ivory',
+        ]}
       >
         {link.label}
       </a>
     ))
   }
-  <a
-    href={BOOKING_URL}
-    target="_blank"
-    rel="noopener"
-    class="mt-8 border border-silver/50 px-10 py-3.5 text-[0.8rem] tracking-[0.28em] text-pearl uppercase"
-  >
-    Book now
-  </a>
-  <p class="mt-10 text-sm font-light tracking-widest text-platinum">
-    <a href="tel:040466045">0404 66 045</a>
-  </p>
 </div>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const overlay = document.getElementById('nav-overlay');
+  const nav = document.getElementById('site-nav');
+
+  toggle?.addEventListener('click', () => {
+    const open = overlay?.classList.toggle('invisible') === false;
+    overlay?.classList.toggle('opacity-0', !open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    // Keep the hamburger visible on the forest overlay.
+    nav?.classList.toggle('menu-open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+    // Re-sync the scrolled state when the overlay closes.
+    if (!open) window.dispatchEvent(new Event('scroll'));
+  });
+
+  overlay?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      overlay.classList.add('invisible', 'opacity-0');
+      toggle?.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+</script>
