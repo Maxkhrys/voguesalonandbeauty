@@ -1,137 +1,151 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-forest: #2d4a3e;
-  --color-sage: #7a9e8e;
-  --color-ivory: #f5f0e8;
-  --color-cream: #ede8dc;
-  --color-gold: #c9a96e;
-  --color-charcoal: #2a2a2a;
+  /* Dark luxury palette — near-black navy, silver/platinum, crisp white */
+  --color-ink: #05070d;
+  --color-navy: #0a0e1a;
+  --color-navy-2: #0f1525;
+  --color-navy-3: #161e33;
+  --color-silver: #c9cfdb;
+  --color-platinum: #98a1b3;
+  --color-pearl: #f5f6f9;
 
-  --font-heading: 'Cormorant Garamond', Georgia, serif;
-  --font-body: 'DM Sans', system-ui, sans-serif;
-}
-
-:root {
-  --forest: #2d4a3e;
-  --sage: #7a9e8e;
-  --ivory: #f5f0e8;
-  --cream: #ede8dc;
-  --gold: #c9a96e;
-  --charcoal: #2a2a2a;
-}
-
-html {
-  scroll-behavior: auto;
-}
-
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body: 'Outfit', system-ui, -apple-system, sans-serif;
 }
 
 body {
-  font-family: var(--font-body);
-  background-color: var(--ivory);
-  color: var(--charcoal);
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-h1,
-h2,
-h3,
-h4 {
-  font-family: var(--font-heading);
-  font-weight: 300;
+::selection {
+  background: var(--color-silver);
+  color: var(--color-ink);
 }
 
-/* Hero headline words start hidden; GSAP staggers them in on load */
-.hero-word {
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(2rem);
-}
-
-/* Elements revealed by ScrollTrigger */
-.fade-up {
-  opacity: 0;
-  transform: translateY(2.5rem);
-}
-
+/* ---- Animation initial states (revealed by GSAP in main.ts) ---- */
+.hero-word,
+.fade-up,
 .stagger-cards > * {
   opacity: 0;
-  transform: translateY(2.5rem);
+  transform: translateY(28px);
 }
 
-/* If JS fails or user prefers reduced motion, keep everything visible */
+.hero-fade {
+  opacity: 0;
+}
+
+/* Reduced motion / no-JS fallback: reveal everything */
+.no-motion .hero-word,
+.no-motion .fade-up,
+.no-motion .stagger-cards > *,
+.no-motion .hero-fade {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* ---- Signature element: concentric silver rings ---- */
+.rings-slow {
+  transform-origin: 50% 50%;
+  animation: rings-rotate 90s linear infinite;
+}
+.rings-slower {
+  transform-origin: 50% 50%;
+  animation: rings-rotate 150s linear infinite reverse;
+}
+@keyframes rings-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
 @media (prefers-reduced-motion: reduce) {
-  .hero-word,
-  .fade-up,
-  .stagger-cards > * {
-    opacity: 1 !important;
-    transform: none !important;
+  .rings-slow,
+  .rings-slower {
+    animation: none;
   }
 }
 
-/* Fixed nav: transparent over the hero, ivory once scrolled */
+/* ---- Nav scrolled state ---- */
 #site-nav {
   transition:
-    background-color 0.4s ease,
-    box-shadow 0.4s ease,
-    color 0.4s ease;
+    background-color 0.45s ease,
+    border-color 0.45s ease;
+  border-bottom: 1px solid transparent;
 }
-
 #site-nav.scrolled {
-  background-color: var(--ivory);
-  box-shadow: 0 1px 24px rgb(42 42 42 / 0.08);
+  background-color: rgb(5 7 13 / 0.88);
+  backdrop-filter: blur(14px);
+  border-bottom-color: rgb(201 207 219 / 0.12);
 }
 
-/* While the mobile overlay is open the nav sits on forest, so stay ivory. */
-#site-nav.menu-open {
-  color: var(--ivory) !important;
-  background-color: transparent !important;
-  box-shadow: none !important;
+/* ---- Hairline rules ---- */
+.hairline {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgb(201 207 219 / 0.35),
+    transparent
+  );
 }
 
-#site-nav .nav-link {
+/* ---- Link underline sweep ---- */
+.link-sweep {
   position: relative;
 }
-
-#site-nav .nav-link::after {
+.link-sweep::after {
   content: '';
   position: absolute;
   left: 0;
   bottom: -4px;
   width: 100%;
   height: 1px;
-  background-color: var(--gold);
+  background: currentColor;
   transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s ease;
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
-
-#site-nav .nav-link:hover::after {
+.link-sweep:hover::after,
+.link-sweep[aria-current='page']::after {
   transform: scaleX(1);
+  transform-origin: left;
 }
 
-/* Services accordion */
-details.service-item summary {
-  list-style: none;
-  cursor: pointer;
+/* ---- FAQ accordion ---- */
+.faq-answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
-
-details.service-item summary::-webkit-details-marker {
-  display: none;
+.faq-answer > div {
+  overflow: hidden;
 }
-
-details.service-item summary .accordion-icon {
-  transition: transform 0.3s ease;
+.faq-item.open .faq-answer {
+  grid-template-rows: 1fr;
 }
-
-details.service-item[open] summary .accordion-icon {
+.faq-item .faq-icon {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.faq-item.open .faq-icon {
   transform: rotate(45deg);
+}
+
+/* ---- Mobile menu overlay ---- */
+#mobile-menu {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+#mobile-menu.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+body.menu-locked {
+  overflow: hidden;
+}
+
+/* ---- Image treatment ---- */
+.img-luxe {
+  filter: saturate(0.82) contrast(1.04);
 }

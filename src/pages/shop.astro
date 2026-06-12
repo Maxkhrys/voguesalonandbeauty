@@ -1,0 +1,126 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+
+const products = [
+  {
+    name: 'Keratin Bonds',
+    weight: '25g',
+    price: '€75',
+    copy: 'Premium individual keratin bond extensions — discreet, versatile and perfect for precision placement.',
+    img: 'https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=1200&q=80',
+    alt: 'Close-up of long styled hair',
+  },
+  {
+    name: 'Nano Beads',
+    weight: '25g',
+    price: '€75',
+    copy: 'Ultra-fine nano bead strands for the most natural-looking, lightweight finish — no heat, no glue.',
+    img: 'https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=1200&q=80',
+    alt: 'Woman with long blonde hair',
+  },
+  {
+    name: 'Genius Weft',
+    weight: '50g',
+    price: '€160',
+    copy: 'Our most luxurious weft — hand-finished, featherlight and cuttable anywhere for a fully bespoke fit.',
+    img: 'https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?auto=format&fit=crop&w=1200&q=80',
+    alt: 'Bright blonde hair in natural light',
+  },
+];
+
+const colours = [
+  { code: '1', name: 'Black', hex: '#191919' },
+  { code: '2', name: 'Darkest Brunette', hex: '#2b1f17' },
+  { code: '5a', name: 'Natural Brunette', hex: '#4a3527' },
+  { code: '5a.11', name: 'Dimensional Bronde', hex: '#6f573d' },
+  { code: '33', name: 'Copper', hex: '#a25a2e' },
+  { code: '4c', name: 'Auburn', hex: '#6e3a24' },
+  { code: '11a.60a', name: 'Rooted Blonde', hex: '#b69a6e' },
+  { code: '60a.12', name: 'Cool Mixed Blonde', hex: '#d3c4a4' },
+  { code: '60a.27', name: 'Warm Mixed Blonde', hex: '#ddbf8d' },
+  { code: '60a', name: 'Lightest Blonde', hex: '#e9ddc2' },
+];
+---
+
+<Layout
+  title="The 67 Collection — Salon 67"
+  description="The 67 Collection — premium keratin bond, nano bead and genius weft hair extensions in ten professional shades. Contact Salon 67 to order."
+>
+  <PageHeader
+    eyebrow="Shop"
+    title="The 67 Collection"
+    intro="Salon-grade hair extensions, hand-picked by us. Every product is available in all ten of our professional shades."
+  />
+
+  <!-- ============ PRODUCT GRID ============ -->
+  <section class="pb-24 lg:pb-32">
+    <div class="mx-auto max-w-7xl px-6 lg:px-10">
+      <div class="stagger-cards grid gap-8 md:grid-cols-3">
+        {
+          products.map((p) => (
+            <article class="group flex flex-col border border-silver/10 bg-navy-2 transition-colors duration-500 hover:border-silver/30">
+              <div class="overflow-hidden">
+                <img
+                  src={p.img}
+                  alt={p.alt}
+                  loading="lazy"
+                  class="img-luxe aspect-square w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+              <div class="flex flex-1 flex-col p-8">
+                <div class="flex items-baseline justify-between gap-4">
+                  <h2 class="font-display text-2xl font-light text-pearl">{p.name}</h2>
+                  <p class="font-display text-xl text-silver">{p.price}</p>
+                </div>
+                <p class="mt-1 text-[0.7rem] tracking-[0.26em] text-platinum uppercase">
+                  {p.weight} · 10 shades
+                </p>
+                <p class="mt-4 flex-1 text-sm leading-relaxed font-light text-platinum">{p.copy}</p>
+                <a
+                  href="/contact"
+                  class="mt-7 inline-block border border-silver/40 px-7 py-3 text-center text-[0.72rem] tracking-[0.28em] text-pearl uppercase transition-all duration-300 hover:bg-silver hover:text-ink"
+                >
+                  Contact to order
+                </a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SHADE PALETTE ============ -->
+  <section class="bg-ink border-t border-silver/10 py-24 lg:py-32">
+    <div class="mx-auto max-w-7xl px-6 lg:px-10">
+      <p class="fade-up text-[0.72rem] tracking-[0.32em] text-platinum uppercase">Shade range</p>
+      <h2 class="fade-up font-display mt-5 max-w-xl text-4xl font-light tracking-tight text-pearl lg:text-5xl">
+        Ten shades, every product
+      </h2>
+      <p class="fade-up mt-6 max-w-xl text-base leading-relaxed font-light text-platinum">
+        Unsure of your match? Bring your hair to us — colour-matching is part of the service.
+      </p>
+
+      <ul class="stagger-cards mt-14 grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3 lg:grid-cols-5">
+        {
+          colours.map((c) => (
+            <li class="flex items-center gap-4">
+              <span
+                class="h-12 w-12 shrink-0 rounded-full ring-1 ring-silver/30"
+                style={`background-color: ${c.hex}`}
+                aria-hidden="true"
+              />
+              <span>
+                <span class="block text-sm font-light text-pearl">{c.name}</span>
+                <span class="block text-[0.68rem] tracking-[0.2em] text-platinum uppercase">
+                  {c.code}
+                </span>
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,21 @@
+---
+// Signature motif: concentric silver rings echoing the Salon 67 logo.
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+<div class={`rings-breathe pointer-events-none select-none ${className}`} aria-hidden="true">
+  <svg viewBox="0 0 600 600" fill="none" class="h-full w-full">
+    <g class="rings-slow">
+      <circle cx="300" cy="300" r="296" stroke="rgb(201 207 219 / 0.14)" stroke-width="1" stroke-dasharray="3 9" />
+      <circle cx="300" cy="300" r="236" stroke="rgb(201 207 219 / 0.20)" stroke-width="1" />
+    </g>
+    <g class="rings-slower">
+      <circle cx="300" cy="300" r="186" stroke="rgb(201 207 219 / 0.16)" stroke-width="1" stroke-dasharray="1 7" />
+      <circle cx="300" cy="300" r="136" stroke="rgb(201 207 219 / 0.26)" stroke-width="1" />
+    </g>
+    <circle cx="300" cy="300" r="92" stroke="rgb(201 207 219 / 0.18)" stroke-width="1" />
+  </svg>
+</div>

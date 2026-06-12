@@ -1,197 +1,157 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PageHeader from '../components/PageHeader.astro';
-import Divider from '../components/Divider.astro';
 
-interface Service {
-  name: string;
-  price: number;
-  description: string;
-}
+const BOOKING_URL = 'https://salon67wicklow.book.app';
 
-interface Group {
-  title: string;
-  services: Service[];
-}
-
-const leftColumn: Group[] = [
+const services = [
   {
-    title: 'Hair',
-    services: [
-      {
-        name: 'Cut & Blow Dry',
-        price: 45,
-        description:
-          'A consultation, precision cut and smooth blow dry finish — tailored to your hair type and how you actually style it at home.',
-      },
-      {
-        name: 'Restyle & Blow Dry',
-        price: 55,
-        description:
-          'Ready for a change? A full restyle with your stylist, from soft shape refresh to a brand-new look.',
-      },
-      {
-        name: 'Full Colour',
-        price: 70,
-        description:
-          'All-over permanent or semi-permanent colour, rich and glossy, with aftercare advice to keep it that way.',
-      },
-      {
-        name: 'Ombre & Balayage',
-        price: 110,
-        description:
-          'Hand-painted, sun-kissed colour that grows out softly — low maintenance, high impact.',
-      },
-      {
-        name: 'Highlights',
-        price: 75,
-        description:
-          'Half head or full head foils for brightness and dimension, finished with a toner and blow dry.',
-      },
-      {
-        name: 'Upstyles & Occasion Hair',
-        price: 60,
-        description:
-          'Weddings, debs and nights out — soft waves, classic chignons or modern braids that last the whole event.',
-      },
-      {
-        name: 'Hair Extensions',
-        price: 250,
-        description:
-          'Length and volume with premium human-hair extensions, fitted and blended after a free consultation.',
-      },
-    ],
+    title: 'Weft Extensions',
+    copy: 'Seamless length and volume applied in discreet rows. The workhorse of transformations — full, flowing results that move naturally.',
+    note: 'Lasts up to 2 years with correct aftercare',
+    img: 'https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=1400&q=80',
+    alt: 'Long hair being styled in a salon',
+  },
+  {
+    title: 'Micro Bead Extensions',
+    copy: 'Individual strands secured with tiny, discreet beads — no heat, no glue. A natural-looking finish that is gentle on your own hair.',
+    note: 'Lasts up to 2 years with correct aftercare',
+    img: 'https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=1400&q=80',
+    alt: 'Hairdresser working through a client’s hair',
+  },
+  {
+    title: 'Keratin Bond Extensions',
+    copy: 'Versatile, long-lasting and beautifully discreet. Individual keratin bonds blend invisibly for total styling freedom — up or down.',
+    note: 'Lasts up to 5 months',
+    img: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1400&q=80',
+    alt: 'Elegant salon interior with styling chairs',
+  },
+  {
+    title: 'Lived-in Blonde',
+    copy: 'Our signature colour service. From seamless, rooted blends to vibrant pops of brightness — low-maintenance blonde that grows out as beautifully as it starts.',
+    note: 'Signature colour service',
+    img: 'https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?auto=format&fit=crop&w=1400&q=80',
+    alt: 'Woman with dimensional blonde colour',
   },
 ];
 
-const rightColumn: Group[] = [
+const faqs = [
   {
-    title: 'Beauty & Nails',
-    services: [
-      {
-        name: 'Facials',
-        price: 50,
-        description:
-          'Deep-cleansing and hydrating facials matched to your skin, leaving you fresh, calm and glowing.',
-      },
-      {
-        name: 'Waxing',
-        price: 12,
-        description:
-          'Fast, gentle warm waxing for brows, lip, legs and more — from quick tidy-ups to full body.',
-      },
-      {
-        name: 'HD Brows',
-        price: 30,
-        description:
-          'A bespoke seven-step brow treatment: tint, shape and define for the perfect frame to your face.',
-      },
-      {
-        name: 'Lash Lift & Tint',
-        price: 45,
-        description:
-          'Curl and darken your natural lashes for a wide-awake look that lasts six to eight weeks.',
-      },
-      {
-        name: 'Manicure',
-        price: 30,
-        description:
-          'Shape, cuticle care, massage and polish — a classic manicure done properly.',
-      },
-      {
-        name: 'Pedicure',
-        price: 40,
-        description:
-          'A soak, scrub and polish for sandal-ready feet, with hard-skin removal and a relaxing massage.',
-      },
-      {
-        name: 'Shellac Nails',
-        price: 35,
-        description:
-          'Chip-free, glossy colour cured to perfection — up to two weeks of flawless nails.',
-      },
-    ],
+    q: 'How long do extensions last?',
+    a: 'It varies by type — keratin bonds last up to 5 months, while weft and micro bead extensions can last up to 1–2 years with proper care and regular maintenance appointments.',
   },
   {
-    title: 'Massage',
-    services: [
-      {
-        name: 'Full Body Massage',
-        price: 65,
-        description:
-          'A full hour to switch off. Relaxing, flowing massage to melt away tension from head to toe.',
-      },
-      {
-        name: 'Back, Neck & Shoulder',
-        price: 45,
-        description:
-          'Targeted relief where you hold the most stress — ideal as a lunchtime reset.',
-      },
-    ],
+    q: 'Can I wash and style extensions like natural hair?',
+    a: 'Yes. Your extensions can be washed, blow-dried and styled much like your own hair. We provide full aftercare guidance at your appointment so they stay looking their best.',
+  },
+  {
+    q: 'What types of extensions do you offer?',
+    a: 'We offer weft, micro bead and keratin bond extensions. Our experts will help you choose the method best suited to your hair type, lifestyle and the look you want.',
   },
 ];
-
-const columns = [leftColumn, rightColumn];
 ---
 
-<Layout title="Services & Prices — Vogue Image Design, Wicklow Town">
+<Layout
+  title="Services — Salon 67"
+  description="Weft, micro bead and keratin bond hair extensions plus our signature lived-in blonde colour service at Salon 67, Wicklow Town."
+>
   <PageHeader
-    eyebrow="Services & prices"
-    title="Treatments for hair, beauty & body"
-    intro="Every visit starts with a chat about what you want. Prices below are starting points — your stylist or therapist will confirm an exact quote before they begin."
+    eyebrow="Services"
+    title="Specialty services"
+    intro="Extensions and blonde colouring are not a sideline here — they are everything we do. Choose your method; we'll perfect the rest."
   />
 
-  <section class="bg-ivory py-20">
-    <div class="mx-auto max-w-6xl px-6">
-      <div class="grid gap-14 lg:grid-cols-2">
+  <section class="pb-24 lg:pb-36">
+    <div class="mx-auto max-w-7xl space-y-20 px-6 lg:space-y-28 lg:px-10">
+      {
+        services.map((s, i) => (
+          <article
+            class={`fade-up grid items-center gap-10 lg:grid-cols-2 lg:gap-16 ${
+              i % 2 === 1 ? 'lg:[&>div:first-child]:order-2' : ''
+            }`}
+          >
+            <div class="overflow-hidden border border-silver/10">
+              <img
+                src={s.img}
+                alt={s.alt}
+                loading="lazy"
+                class="img-luxe parallax-img aspect-[4/3] w-full object-cover"
+              />
+            </div>
+            <div>
+              <p class="font-display text-6xl font-light text-silver/20">
+                0{i + 1}
+              </p>
+              <h2 class="font-display mt-2 text-3xl font-light tracking-tight text-pearl lg:text-4xl">
+                {s.title}
+              </h2>
+              <p class="mt-5 max-w-md text-base leading-relaxed font-light text-platinum">
+                {s.copy}
+              </p>
+              <p class="mt-6 inline-block border border-silver/25 px-4 py-2 text-[0.68rem] tracking-[0.24em] text-silver uppercase">
+                {s.note}
+              </p>
+              <div class="mt-8">
+                <a
+                  href={BOOKING_URL}
+                  target="_blank"
+                  rel="noopener"
+                  class="link-sweep text-[0.74rem] tracking-[0.28em] text-pearl uppercase"
+                >
+                  Book this service
+                </a>
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="bg-ink border-t border-silver/10 py-24 lg:py-32">
+    <div class="mx-auto max-w-3xl px-6 lg:px-10">
+      <p class="fade-up text-center text-[0.72rem] tracking-[0.32em] text-platinum uppercase">
+        Good to know
+      </p>
+      <h2 class="fade-up font-display mt-5 text-center text-4xl font-light tracking-tight text-pearl lg:text-5xl">
+        Questions, answered
+      </h2>
+
+      <div class="stagger-cards mt-14 divide-y divide-silver/10 border-y border-silver/10">
         {
-          columns.map((groups) => (
-            <div class="space-y-14">
-              {groups.map((group) => (
-                <div class="fade-up">
-                  <h2 class="font-heading text-4xl font-light text-forest">{group.title}</h2>
-                  <div class="mt-6 border-t border-cream">
-                    {group.services.map((service) => (
-                      <details class="service-item border-b border-cream">
-                        <summary class="flex items-center justify-between gap-4 py-5">
-                          <span class="font-heading text-xl text-charcoal">{service.name}</span>
-                          <span class="flex items-center gap-4">
-                            <span class="whitespace-nowrap text-sm tracking-wide text-gold">
-                              from €{service.price}
-                            </span>
-                            <span class="accordion-icon font-heading text-2xl leading-none text-sage">
-                              +
-                            </span>
-                          </span>
-                        </summary>
-                        <p class="pb-6 pr-10 text-sm leading-relaxed text-charcoal/75">
-                          {service.description}
-                        </p>
-                      </details>
-                    ))}
-                  </div>
+          faqs.map((faq) => (
+            <div class="faq-item">
+              <button
+                type="button"
+                aria-expanded="false"
+                class="flex w-full items-center justify-between gap-6 py-6 text-left"
+              >
+                <span class="font-display text-lg font-light text-pearl lg:text-xl">{faq.q}</span>
+                <span class="faq-icon font-display shrink-0 text-2xl leading-none text-silver" aria-hidden="true">
+                  +
+                </span>
+              </button>
+              <div class="faq-answer">
+                <div>
+                  <p class="pb-7 text-sm leading-relaxed font-light text-platinum lg:text-base">
+                    {faq.a}
+                  </p>
                 </div>
-              ))}
+              </div>
             </div>
           ))
         }
       </div>
 
-      <Divider class="mt-20 text-sage" />
-
-      <div class="fade-up mt-12 text-center">
-        <p class="mx-auto max-w-xl text-charcoal/75">
-          Can't see what you're after? Call us on
-          <a href="tel:+35340432790" class="text-forest underline decoration-gold underline-offset-4">
-            0404 32 790
-          </a>
-          — if it's hair, beauty or massage, chances are we do it.
-        </p>
+      <div class="fade-up mt-14 text-center">
         <a
-          href="/booking"
-          class="mt-8 inline-block bg-gold px-8 py-4 text-sm uppercase tracking-[0.2em] text-charcoal transition-colors hover:bg-forest hover:text-ivory"
+          href={BOOKING_URL}
+          target="_blank"
+          rel="noopener"
+          class="bg-silver text-ink inline-block px-10 py-4 text-[0.78rem] tracking-[0.28em] uppercase transition-all duration-300 hover:bg-pearl"
         >
-          Book now
+          Book your consultation
         </a>
       </div>
     </div>

@@ -1,136 +1,147 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PageHeader from '../components/PageHeader.astro';
+
+const BOOKING_URL = 'https://salon67wicklow.book.app';
+const VOUCHER_URL = 'https://www.salon67wicklow.com/product/21187357/gift-vouchers';
+
+const socials = [
+  { href: 'https://facebook.com/share/1FgRcJDdt4', label: 'Facebook' },
+  { href: 'https://instagram.com/salon67wicklow', label: 'Instagram' },
+  { href: 'https://tiktok.com/@salon67wicklow', label: 'TikTok' },
+];
 ---
 
-<Layout title="Contact & Find Us — Vogue Image Design, Wicklow Town">
+<Layout
+  title="Contact — Salon 67"
+  description="Visit Salon 67 in Wicklow Town, call 0404 66 045 or book online. We'd love to hear from you."
+>
   <PageHeader
     eyebrow="Contact"
     title="Come say hello"
-    intro="Right on Main Street in the Up Mall — easy to find, easier to stay. Call, message or drop in any day of the week."
+    intro="Questions about extensions, colour or The 67 Collection? Call, message or book straight in — we'd love to hear from you."
   />
 
-  <section class="bg-ivory py-20">
-    <div class="mx-auto max-w-6xl px-6">
-      <div class="grid gap-14 lg:grid-cols-2">
-        <div class="fade-up space-y-10">
-          <div>
-            <h2 class="text-sm uppercase tracking-[0.25em] text-sage">Address</h2>
-            <address class="mt-4 font-heading text-2xl font-light not-italic leading-snug text-forest">
-              Shop A, No. 20 Up Mall,<br />
-              Main St, Wicklow Town,<br />
-              Co. Wicklow
-            </address>
-          </div>
-
-          <div>
-            <h2 class="text-sm uppercase tracking-[0.25em] text-sage">Phone</h2>
-            <a
-              href="tel:+35340432790"
-              class="mt-4 inline-block font-heading text-2xl font-light text-forest transition-colors hover:text-gold"
-            >
-              0404 32 790
-            </a>
-          </div>
-
-          <div>
-            <h2 class="text-sm uppercase tracking-[0.25em] text-sage">Opening hours</h2>
-            <p class="mt-4 font-heading text-2xl font-light text-forest">
-              Monday – Sunday, 9:30am – 6:00pm
-            </p>
-            <p class="mt-2 text-sm text-charcoal/65">
-              Open 7 days a week · walk-ins welcome
-            </p>
-          </div>
-
-          <div>
-            <h2 class="text-sm uppercase tracking-[0.25em] text-sage">Social</h2>
-            <a
-              href="https://facebook.com/VogueHairAndBeautySalonWicklowTown"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="mt-4 inline-block text-forest underline decoration-gold underline-offset-4 transition-colors hover:text-gold"
-            >
-              facebook.com/VogueHairAndBeautySalonWicklowTown
-            </a>
-          </div>
-        </div>
-
+  <section class="pb-24 lg:pb-36">
+    <div class="mx-auto max-w-7xl px-6 lg:px-10">
+      <div class="grid gap-16 lg:grid-cols-2 lg:gap-24">
+        <!-- Details -->
         <div class="fade-up">
-          <iframe
-            src="https://www.google.com/maps?q=Main+Street,+Wicklow+Town,+Co.+Wicklow,+Ireland&output=embed"
-            title="Map showing Vogue Image Design on Main Street, Wicklow Town"
-            class="h-full min-h-[24rem] w-full border border-cream"
-            style="filter: grayscale(20%);"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            allowfullscreen></iframe>
-        </div>
-      </div>
+          <dl class="space-y-10">
+            <div>
+              <dt class="text-[0.72rem] tracking-[0.32em] text-platinum uppercase">Address</dt>
+              <dd class="font-display mt-3 text-2xl font-light text-pearl">
+                Salon 67<br />Wicklow Town<br />A67 HD96
+              </dd>
+            </div>
+            <div>
+              <dt class="text-[0.72rem] tracking-[0.32em] text-platinum uppercase">Phone</dt>
+              <dd class="mt-3">
+                <a
+                  href="tel:040466045"
+                  class="font-display link-sweep text-2xl font-light text-pearl"
+                >
+                  0404 66 045
+                </a>
+              </dd>
+            </div>
+            <div>
+              <dt class="text-[0.72rem] tracking-[0.32em] text-platinum uppercase">Follow us</dt>
+              <dd class="mt-4 flex gap-7">
+                {
+                  socials.map((s) => (
+                    <a
+                      href={s.href}
+                      target="_blank"
+                      rel="noopener"
+                      class="link-sweep text-[0.74rem] tracking-[0.24em] text-silver uppercase transition-colors hover:text-pearl"
+                    >
+                      {s.label}
+                    </a>
+                  ))
+                }
+              </dd>
+            </div>
+          </dl>
 
-      <div class="fade-up mt-20 border border-cream bg-white p-10 sm:p-14">
-        <h2 class="font-heading text-3xl font-light text-forest">Send us a message</h2>
-        <p class="mt-3 text-sm text-charcoal/70">
-          For appointment requests the quickest option is the
-          <a href="/booking" class="text-forest underline decoration-gold underline-offset-4">booking page</a>
-          — for anything else, drop us a line below.
-        </p>
-
-        <form id="contact-form" class="mt-10 grid gap-6 sm:grid-cols-2">
-          <label class="block text-sm">
-            <span class="text-charcoal/70">Your name</span>
-            <input
-              type="text"
-              name="name"
-              required
-              class="mt-2 w-full border border-cream bg-ivory px-4 py-3 outline-none transition-colors focus:border-sage"
-            />
-          </label>
-          <label class="block text-sm">
-            <span class="text-charcoal/70">Phone or email</span>
-            <input
-              type="text"
-              name="contact"
-              required
-              class="mt-2 w-full border border-cream bg-ivory px-4 py-3 outline-none transition-colors focus:border-sage"
-            />
-          </label>
-          <label class="block text-sm sm:col-span-2">
-            <span class="text-charcoal/70">Message</span>
-            <textarea
-              name="message"
-              rows="5"
-              required
-              class="mt-2 w-full border border-cream bg-ivory px-4 py-3 outline-none transition-colors focus:border-sage"
-            ></textarea>
-          </label>
-          <div class="sm:col-span-2">
-            <button
-              type="submit"
-              class="bg-gold px-8 py-4 text-sm uppercase tracking-[0.2em] text-charcoal transition-colors hover:bg-forest hover:text-ivory"
+          <div class="mt-12 flex flex-col gap-4 sm:flex-row">
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener"
+              class="bg-silver text-ink inline-block px-10 py-4 text-center text-[0.78rem] tracking-[0.28em] uppercase transition-all duration-300 hover:bg-pearl"
             >
-              Send message
-            </button>
-            <p class="mt-3 text-xs text-charcoal/50">
-              Opens your email app — demo form, no details are stored.
-            </p>
+              Book online
+            </a>
+            <a
+              href={VOUCHER_URL}
+              target="_blank"
+              rel="noopener"
+              class="inline-block border border-silver/40 px-10 py-4 text-center text-[0.78rem] tracking-[0.28em] text-pearl uppercase transition-all duration-300 hover:border-silver"
+            >
+              Gift vouchers
+            </a>
           </div>
+        </div>
+
+        <!-- Form -->
+        <form
+          action="mailto:hello@salon67wicklow.com"
+          method="post"
+          enctype="text/plain"
+          class="fade-up border border-silver/10 bg-navy-2 p-8 lg:p-12"
+        >
+          <h2 class="font-display text-2xl font-light text-pearl">Send us a message</h2>
+          <div class="mt-8 space-y-7">
+            <div>
+              <label for="name" class="block text-[0.7rem] tracking-[0.28em] text-platinum uppercase">
+                Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                autocomplete="name"
+                class="mt-3 w-full border-b border-silver/25 bg-transparent py-3 font-light text-pearl transition-colors outline-none placeholder:text-platinum/50 focus:border-silver"
+                placeholder="Your name"
+              />
+            </div>
+            <div>
+              <label for="email" class="block text-[0.7rem] tracking-[0.28em] text-platinum uppercase">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                autocomplete="email"
+                class="mt-3 w-full border-b border-silver/25 bg-transparent py-3 font-light text-pearl transition-colors outline-none placeholder:text-platinum/50 focus:border-silver"
+                placeholder="you@example.com"
+              />
+            </div>
+            <div>
+              <label for="message" class="block text-[0.7rem] tracking-[0.28em] text-platinum uppercase">
+                Message
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                required
+                class="mt-3 w-full resize-none border-b border-silver/25 bg-transparent py-3 font-light text-pearl transition-colors outline-none placeholder:text-platinum/50 focus:border-silver"
+                placeholder="Tell us about your dream hair…"></textarea>
+            </div>
+          </div>
+          <button
+            type="submit"
+            class="bg-silver text-ink mt-10 w-full px-10 py-4 text-[0.78rem] tracking-[0.28em] uppercase transition-all duration-300 hover:bg-pearl"
+          >
+            Send message
+          </button>
         </form>
       </div>
     </div>
   </section>
-
-  <script>
-    // Demo contact form: builds a mailto link from the fields.
-    const form = document.getElementById('contact-form') as HTMLFormElement | null;
-    form?.addEventListener('submit', (event) => {
-      event.preventDefault();
-      const data = new FormData(form);
-      const subject = encodeURIComponent(`Website enquiry from ${data.get('name')}`);
-      const body = encodeURIComponent(
-        `Name: ${data.get('name')}\nContact: ${data.get('contact')}\n\n${data.get('message')}`
-      );
-      window.location.href = `mailto:hello@vogueimagedesign.ie?subject=${subject}&body=${body}`;
-    });
-  </script>
 </Layout>
