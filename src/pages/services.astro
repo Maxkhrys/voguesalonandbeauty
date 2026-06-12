@@ -1,0 +1,199 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Divider from '../components/Divider.astro';
+
+interface Service {
+  name: string;
+  price: number;
+  description: string;
+}
+
+interface Group {
+  title: string;
+  services: Service[];
+}
+
+const leftColumn: Group[] = [
+  {
+    title: 'Hair',
+    services: [
+      {
+        name: 'Cut & Blow Dry',
+        price: 45,
+        description:
+          'A consultation, precision cut and smooth blow dry finish — tailored to your hair type and how you actually style it at home.',
+      },
+      {
+        name: 'Restyle & Blow Dry',
+        price: 55,
+        description:
+          'Ready for a change? A full restyle with your stylist, from soft shape refresh to a brand-new look.',
+      },
+      {
+        name: 'Full Colour',
+        price: 70,
+        description:
+          'All-over permanent or semi-permanent colour, rich and glossy, with aftercare advice to keep it that way.',
+      },
+      {
+        name: 'Ombre & Balayage',
+        price: 110,
+        description:
+          'Hand-painted, sun-kissed colour that grows out softly — low maintenance, high impact.',
+      },
+      {
+        name: 'Highlights',
+        price: 75,
+        description:
+          'Half head or full head foils for brightness and dimension, finished with a toner and blow dry.',
+      },
+      {
+        name: 'Upstyles & Occasion Hair',
+        price: 60,
+        description:
+          'Weddings, debs and nights out — soft waves, classic chignons or modern braids that last the whole event.',
+      },
+      {
+        name: 'Hair Extensions',
+        price: 250,
+        description:
+          'Length and volume with premium human-hair extensions, fitted and blended after a free consultation.',
+      },
+    ],
+  },
+];
+
+const rightColumn: Group[] = [
+  {
+    title: 'Beauty & Nails',
+    services: [
+      {
+        name: 'Facials',
+        price: 50,
+        description:
+          'Deep-cleansing and hydrating facials matched to your skin, leaving you fresh, calm and glowing.',
+      },
+      {
+        name: 'Waxing',
+        price: 12,
+        description:
+          'Fast, gentle warm waxing for brows, lip, legs and more — from quick tidy-ups to full body.',
+      },
+      {
+        name: 'HD Brows',
+        price: 30,
+        description:
+          'A bespoke seven-step brow treatment: tint, shape and define for the perfect frame to your face.',
+      },
+      {
+        name: 'Lash Lift & Tint',
+        price: 45,
+        description:
+          'Curl and darken your natural lashes for a wide-awake look that lasts six to eight weeks.',
+      },
+      {
+        name: 'Manicure',
+        price: 30,
+        description:
+          'Shape, cuticle care, massage and polish — a classic manicure done properly.',
+      },
+      {
+        name: 'Pedicure',
+        price: 40,
+        description:
+          'A soak, scrub and polish for sandal-ready feet, with hard-skin removal and a relaxing massage.',
+      },
+      {
+        name: 'Shellac Nails',
+        price: 35,
+        description:
+          'Chip-free, glossy colour cured to perfection — up to two weeks of flawless nails.',
+      },
+    ],
+  },
+  {
+    title: 'Massage',
+    services: [
+      {
+        name: 'Full Body Massage',
+        price: 65,
+        description:
+          'A full hour to switch off. Relaxing, flowing massage to melt away tension from head to toe.',
+      },
+      {
+        name: 'Back, Neck & Shoulder',
+        price: 45,
+        description:
+          'Targeted relief where you hold the most stress — ideal as a lunchtime reset.',
+      },
+    ],
+  },
+];
+
+const columns = [leftColumn, rightColumn];
+---
+
+<Layout title="Services & Prices — Vogue Image Design, Wicklow Town">
+  <PageHeader
+    eyebrow="Services & prices"
+    title="Treatments for hair, beauty & body"
+    intro="Every visit starts with a chat about what you want. Prices below are starting points — your stylist or therapist will confirm an exact quote before they begin."
+  />
+
+  <section class="bg-ivory py-20">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="grid gap-14 lg:grid-cols-2">
+        {
+          columns.map((groups) => (
+            <div class="space-y-14">
+              {groups.map((group) => (
+                <div class="fade-up">
+                  <h2 class="font-heading text-4xl font-light text-forest">{group.title}</h2>
+                  <div class="mt-6 border-t border-cream">
+                    {group.services.map((service) => (
+                      <details class="service-item border-b border-cream">
+                        <summary class="flex items-center justify-between gap-4 py-5">
+                          <span class="font-heading text-xl text-charcoal">{service.name}</span>
+                          <span class="flex items-center gap-4">
+                            <span class="whitespace-nowrap text-sm tracking-wide text-gold">
+                              from €{service.price}
+                            </span>
+                            <span class="accordion-icon font-heading text-2xl leading-none text-sage">
+                              +
+                            </span>
+                          </span>
+                        </summary>
+                        <p class="pb-6 pr-10 text-sm leading-relaxed text-charcoal/75">
+                          {service.description}
+                        </p>
+                      </details>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ))
+        }
+      </div>
+
+      <Divider class="mt-20 text-sage" />
+
+      <div class="fade-up mt-12 text-center">
+        <p class="mx-auto max-w-xl text-charcoal/75">
+          Can't see what you're after? Call us on
+          <a href="tel:+35340432790" class="text-forest underline decoration-gold underline-offset-4">
+            0404 32 790
+          </a>
+          — if it's hair, beauty or massage, chances are we do it.
+        </p>
+        <a
+          href="/booking"
+          class="mt-8 inline-block bg-gold px-8 py-4 text-sm uppercase tracking-[0.2em] text-charcoal transition-colors hover:bg-forest hover:text-ivory"
+        >
+          Book now
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,66 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+---
+
+<Layout title="Book an Appointment — Vogue Image Design, Wicklow Town">
+  <PageHeader
+    eyebrow="Booking"
+    title="Reserve your appointment"
+    intro="Pick a time that suits you and we'll take care of the rest. Prefer to chat? Call us on 0404 32 790 or just walk in — we keep space free every day."
+  />
+
+  <section class="bg-ivory py-20">
+    <div class="mx-auto max-w-4xl px-6">
+      <!-- replace with Fresha embed from app.fresha.com → Marketing → Booking widget -->
+      <div
+        id="fresha-widget"
+        class="fade-up flex min-h-[28rem] flex-col items-center justify-center border border-dashed border-sage/60 bg-white p-10 text-center"
+      >
+        <p class="font-heading text-3xl font-light text-forest">Online booking</p>
+        <p class="mt-4 max-w-md text-sm leading-relaxed text-charcoal/70">
+          Our Fresha booking widget loads here. In the meantime, call
+          <a href="tel:+35340432790" class="text-forest underline decoration-gold underline-offset-4">
+            0404 32 790
+          </a>
+          to book your appointment.
+        </p>
+      </div>
+
+      <div class="fade-up mt-12 border-l-2 border-gold bg-cream p-8">
+        <h2 class="font-heading text-2xl font-light text-forest">Deposit policy</h2>
+        <p class="mt-3 text-sm leading-relaxed text-charcoal/80">
+          A <strong>20% deposit</strong> confirms your appointment, with the
+          <strong>balance payable on the day</strong>. Deposits are fully transferable with 24
+          hours' notice if you need to reschedule.
+        </p>
+      </div>
+
+      <div class="stagger-cards mt-12 grid gap-8 sm:grid-cols-2">
+        <div class="border border-cream bg-white p-10">
+          <svg viewBox="0 0 24 24" fill="currentColor" class="h-10 w-10 text-forest" aria-hidden="true">
+            <path
+              d="M17.05 12.54c-.03-2.43 1.99-3.6 2.08-3.66-1.13-1.65-2.9-1.88-3.52-1.9-1.5-.16-2.93.88-3.69.88-.76 0-1.94-.86-3.19-.84-1.64.03-3.15.95-4 2.42-1.7 2.95-.43 7.32 1.23 9.72.81 1.17 1.78 2.49 3.05 2.44 1.22-.05 1.69-.79 3.17-.79 1.48 0 1.9.79 3.19.77 1.32-.03 2.16-1.2 2.97-2.38.93-1.36 1.32-2.68 1.34-2.75-.03-.01-2.57-.99-2.6-3.91zM14.62 5.4c.67-.81 1.12-1.94 1-3.06-.97.04-2.14.64-2.83 1.45-.62.72-1.17 1.87-1.02 2.97 1.08.08 2.18-.55 2.85-1.36z"
+            ></path>
+          </svg>
+          <h3 class="mt-5 font-heading text-2xl font-light text-forest">Apple Pay</h3>
+          <p class="mt-3 text-sm leading-relaxed text-charcoal/70">
+            Pay your deposit instantly and securely with Apple Pay — no card details to type,
+            confirmed in seconds.
+          </p>
+        </div>
+
+        <div class="border border-cream bg-white p-10">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-10 w-10 text-forest" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M3 10l9-6 9 6M5 10v8m4-8v8m6-8v8m4-8v8M3 21h18M4 18h16"></path>
+          </svg>
+          <h3 class="mt-5 font-heading text-2xl font-light text-forest">Bank Transfer</h3>
+          <p class="mt-3 text-sm leading-relaxed text-charcoal/70">
+            Prefer a transfer? We'll send our IBAN with your booking confirmation — just use
+            your name as the reference.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

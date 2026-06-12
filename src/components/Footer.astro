@@ -1,0 +1,74 @@
+---
+import Divider from './Divider.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-forest text-ivory">
+  <div class="mx-auto max-w-6xl px-6 py-16">
+    <div class="grid gap-12 md:grid-cols-4">
+      <div>
+        <a href="/" class="flex flex-col" aria-label="Vogue Image Design — home">
+          <span class="font-heading text-3xl font-light tracking-[0.25em]">VOGUE</span>
+          <span class="mt-1 text-xs uppercase tracking-[0.3em] text-sage">Image Design</span>
+        </a>
+        <p class="mt-5 max-w-xs text-sm leading-relaxed text-ivory/70">
+          Hair &amp; beauty salon in the heart of Wicklow Town. Open seven days a week —
+          walk-ins always welcome.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="text-sm uppercase tracking-[0.25em] text-gold">Quick links</h3>
+        <ul class="mt-5 space-y-3 text-sm">
+          <li><a href="/services" class="transition-colors hover:text-gold">Services</a></li>
+          <li><a href="/booking" class="transition-colors hover:text-gold">Book an appointment</a></li>
+          <li><a href="/about" class="transition-colors hover:text-gold">About us</a></li>
+          <li><a href="/contact" class="transition-colors hover:text-gold">Contact</a></li>
+          <li>
+            <a
+              href="https://facebook.com/VogueHairAndBeautySalonWicklowTown"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="transition-colors hover:text-gold"
+            >
+              Facebook
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-sm uppercase tracking-[0.25em] text-gold">Opening hours</h3>
+        <ul class="mt-5 space-y-3 text-sm text-ivory/85">
+          <li class="flex justify-between gap-6">
+            <span>Monday – Sunday</span>
+            <span>9:30am – 6:00pm</span>
+          </li>
+          <li class="text-ivory/60">Open 7 days a week</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-sm uppercase tracking-[0.25em] text-gold">Find us</h3>
+        <address class="mt-5 space-y-3 text-sm not-italic text-ivory/85">
+          <p>
+            Shop A, No. 20 Up Mall,<br />
+            Main St, Wicklow Town,<br />
+            Co. Wicklow
+          </p>
+          <p>
+            <a href="tel:+35340432790" class="transition-colors hover:text-gold">0404 32 790</a>
+          </p>
+        </address>
+      </div>
+    </div>
+
+    <Divider class="mt-14 text-sage" />
+
+    <div class="mt-8 flex flex-col items-center justify-between gap-3 text-xs text-ivory/50 sm:flex-row">
+      <p>&copy; {year} Vogue Image Design. All rights reserved.</p>
+      <p>Site by Max</p>
+    </div>
+  </div>
+</footer>

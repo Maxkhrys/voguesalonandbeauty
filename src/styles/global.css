@@ -1,0 +1,137 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-forest: #2d4a3e;
+  --color-sage: #7a9e8e;
+  --color-ivory: #f5f0e8;
+  --color-cream: #ede8dc;
+  --color-gold: #c9a96e;
+  --color-charcoal: #2a2a2a;
+
+  --font-heading: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+}
+
+:root {
+  --forest: #2d4a3e;
+  --sage: #7a9e8e;
+  --ivory: #f5f0e8;
+  --cream: #ede8dc;
+  --gold: #c9a96e;
+  --charcoal: #2a2a2a;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--ivory);
+  color: var(--charcoal);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  font-weight: 300;
+}
+
+/* Hero headline words start hidden; GSAP staggers them in on load */
+.hero-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(2rem);
+}
+
+/* Elements revealed by ScrollTrigger */
+.fade-up {
+  opacity: 0;
+  transform: translateY(2.5rem);
+}
+
+.stagger-cards > * {
+  opacity: 0;
+  transform: translateY(2.5rem);
+}
+
+/* If JS fails or user prefers reduced motion, keep everything visible */
+@media (prefers-reduced-motion: reduce) {
+  .hero-word,
+  .fade-up,
+  .stagger-cards > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Fixed nav: transparent over the hero, ivory once scrolled */
+#site-nav {
+  transition:
+    background-color 0.4s ease,
+    box-shadow 0.4s ease,
+    color 0.4s ease;
+}
+
+#site-nav.scrolled {
+  background-color: var(--ivory);
+  box-shadow: 0 1px 24px rgb(42 42 42 / 0.08);
+}
+
+/* While the mobile overlay is open the nav sits on forest, so stay ivory. */
+#site-nav.menu-open {
+  color: var(--ivory) !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+#site-nav .nav-link {
+  position: relative;
+}
+
+#site-nav .nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 1px;
+  background-color: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+#site-nav .nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* Services accordion */
+details.service-item summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+details.service-item summary::-webkit-details-marker {
+  display: none;
+}
+
+details.service-item summary .accordion-icon {
+  transition: transform 0.3s ease;
+}
+
+details.service-item[open] summary .accordion-icon {
+  transform: rotate(45deg);
+}

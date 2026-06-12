@@ -1,0 +1,104 @@
+---
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/services', label: 'Services' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
+];
+const { pathname } = Astro.url;
+---
+
+<header
+  id="site-nav"
+  class="fixed inset-x-0 top-0 z-50 text-ivory [&.scrolled]:text-charcoal"
+>
+  <nav class="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
+    <a href="/" class="flex items-baseline gap-2" aria-label="Vogue Image Design — home">
+      <span class="font-heading text-3xl font-light tracking-[0.25em]">VOGUE</span>
+      <span class="text-xs uppercase tracking-[0.3em] opacity-80">Image Design</span>
+    </a>
+
+    <div class="hidden items-center gap-8 md:flex">
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            class:list={[
+              'nav-link text-sm uppercase tracking-[0.2em]',
+              pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href))
+                ? 'text-gold'
+                : '',
+            ]}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+      <a
+        href="/booking"
+        class="bg-gold px-5 py-2.5 text-sm uppercase tracking-[0.2em] text-charcoal transition-colors hover:bg-sage hover:text-ivory"
+      >
+        Book now
+      </a>
+    </div>
+
+    <button
+      id="nav-toggle"
+      type="button"
+      class="flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="nav-overlay"
+    >
+      <span class="block h-px w-7 bg-current transition-transform"></span>
+      <span class="block h-px w-7 bg-current transition-opacity"></span>
+      <span class="block h-px w-7 bg-current transition-transform"></span>
+    </button>
+  </nav>
+</header>
+
+<!-- Fullscreen mobile menu -->
+<div
+  id="nav-overlay"
+  class="invisible fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 bg-forest opacity-0 transition-all duration-300 md:hidden"
+>
+  {
+    [...links, { href: '/booking', label: 'Book now' }].map((link) => (
+      <a
+        href={link.href}
+        class:list={[
+          'font-heading text-4xl font-light',
+          link.href === '/booking' ? 'text-gold' : 'text-ivory',
+        ]}
+      >
+        {link.label}
+      </a>
+    ))
+  }
+</div>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const overlay = document.getElementById('nav-overlay');
+  const nav = document.getElementById('site-nav');
+
+  toggle?.addEventListener('click', () => {
+    const open = overlay?.classList.toggle('invisible') === false;
+    overlay?.classList.toggle('opacity-0', !open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    // Keep the hamburger visible on the forest overlay.
+    nav?.classList.toggle('menu-open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+    // Re-sync the scrolled state when the overlay closes.
+    if (!open) window.dispatchEvent(new Event('scroll'));
+  });
+
+  overlay?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      overlay.classList.add('invisible', 'opacity-0');
+      toggle?.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+</script>
